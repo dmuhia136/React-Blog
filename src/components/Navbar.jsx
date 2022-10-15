@@ -6,10 +6,13 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useAuth } from "../utils/auth";
+import { ReactSession } from "react-client-session";
 
 function Navbar() {
   const [toggle, setToggle] = useState(false);
-const auth=useAuth()
+  const fname = ReactSession.get("firstName");
+  const lname = ReactSession.get("lastName");
+  const auth = useAuth();
   return (
     <nav className="sticky top-0 z-50 bg-gray-800 h-[50px] flex justify-between  text-white">
       <div className="pl-[10px] pt-[10px] flex gap-x-2 items-center">
@@ -30,7 +33,7 @@ const auth=useAuth()
             setToggle((prev) => setToggle(!prev));
           }}
         >
-          <p> {auth.user}</p>
+          <p> {fname} {lname}</p>
           <FaAngleDown />
         </div>
         <div
