@@ -5,7 +5,7 @@ var cors = require('cors')
 const connectMongo = require("./config/mongoose")
 connectMongo.connect()
 app.use(cors())
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 6000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

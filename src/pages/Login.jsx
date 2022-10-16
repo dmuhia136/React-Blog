@@ -10,7 +10,7 @@ function Login() {
   const [password, setPassword] = useState("");
   ReactSession.setStoreType("localStorage");
   const auth = useAuth();
-  const url = "http://192.168.99.1:5000/user/login";
+  const url = "http://192.168.99.1:9000/user/login";
   const navigate = useNavigate();
   async function handleLogin(event) {
     event.preventDefault();
@@ -25,6 +25,7 @@ function Login() {
     auth.login(data.data.body.firstName);
     ReactSession.set("firstName", data.data.body.firstName);
     ReactSession.set("lastName", data.data.body.lastName);
+    ReactSession.set("userid", data.data.body._id);
 
     navigate("/");
   }
@@ -36,14 +37,14 @@ function Login() {
   return (
     <div className="bg-gray-600 text-white place-items-center justify-center items-center flex">
       <div className="w-[500px] flex items-center justify-center h-screen ">
-        <div className="space-y-5">
+        <div className="space-y-5 border-blue-600 rounded-lg bg-gray-200 place-items-center p-2">
           <div className="pl-[150px]">
             <img
               src=".././src/assets/login.png"
-              className="rounded-full w-[100px]"
+              className="rounded-full w-[100px] ml-7"
             />
           </div>
-          <form onSubmit={handleLogin}>
+          <form onSubmit={handleLogin} className="ml-7">
             <div className="space-y-4">
               <input
                 ref={emailFocus}

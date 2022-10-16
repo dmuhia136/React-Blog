@@ -15,15 +15,23 @@ exports.createPost = async (req, res) => {
                     var post = new postModel({
                         title: req.body.title,
                         body: req.body.body,
-                        author: req.body.author,
-                        image: req.file.filename
+                        author: req.body.author
                     })
-                      if (req.file) {
-                        post.file = req.file.filename;
-                      }
-                    res.status(200).json({ status: true, message: "Post created", body: data })
+                    post.save(async (response) => {
+                        if (req.file) {
+                            await postModel.findByIdAndUpdate(response._id, {
+                                $set: {
+                                    image: req.file.filename
+                                }
+                            })
+                        }
+                    }).catch((err) => {
+                        throw new Error(err.toString());
+                    })
+
+                    res.status(200).json({ status: true, message: "Post created" })
                 } catch (error) {
-                    res.status(500).json({ jj:"uu",status: false, message: error.message });
+                    res.status(500).json({ jj: "uu", status: false, message: error.message });
                 }
             }
         });
@@ -31,5 +39,14 @@ exports.createPost = async (req, res) => {
     } catch (error) {
         res.json({ status: false, message: error.message });
 
+    }
+}
+
+exports.fetchPosts = async (req, res) => {
+    try {
+        var data = await postModel.find({}).populate("author").sort({ createdAt: -1 })
+        res.json({ status: true, body: data })
+    } catch (error) {
+        res.json({ status: false, message: error.message })
     }
 }
