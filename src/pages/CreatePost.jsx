@@ -15,11 +15,11 @@ function CreatePost() {
   const navigate = useNavigate();
   const auth = useAuth();
 
-  const imgFilehandler = (e) => {
-    if (e.target.files.length !== 0) {
-      setImage((image) => [...image, URL.createObjectURL(e.target.files[0])]);
-    }
-  };
+  // const imgFilehandler = (e) => {
+  //   if (e.target.files.length !== 0) {
+  //     setImage((image) => [...image, URL.createObjectURL(e.target.files[0])]);
+  //   }
+  // };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -75,7 +75,7 @@ function CreatePost() {
               type="file"
               className="text-white"
               placeholder="Upload blog image"
-              onChange={imgFilehandler}
+              onChange={()=>setImage(e.target.value)}
             />
           </div>
           <div className="pt-4" />

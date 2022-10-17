@@ -17,7 +17,9 @@ exports.createPost = async (req, res) => {
                         body: req.body.body,
                         author: req.body.author
                     })
-                    post.save(async (response) => {
+                    post.save().then(async (response) => {
+
+                        console.log(response);
                         if (req.file) {
                             await postModel.findByIdAndUpdate(response._id, {
                                 $set: {
@@ -25,8 +27,7 @@ exports.createPost = async (req, res) => {
                                 }
                             })
                         }
-                    }).catch((err) => {
-                        throw new Error(err.toString());
+
                     })
 
                     res.status(200).json({ status: true, message: "Post created" })

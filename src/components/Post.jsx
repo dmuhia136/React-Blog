@@ -7,7 +7,7 @@ function Post({ image, title, author }) {
       <div className="">
         <img
           className="h-[300px] w-full rounded-xl object-contain hover:object-scale-down cursor-pointer "
-          src={image}
+          src={`http://192.168.99.1:9000/`+image}
         />
       </div>
       <div className="ml-3 mt-2 sm:mt-2 sm:ml-4 mb-2">
@@ -15,7 +15,8 @@ function Post({ image, title, author }) {
         <span className="text-normal font-medium font-serif ">
          
         </span>
-        <p>Author: {author}</p>
+        {author && 
+        <p>Author: {author.firstName} {author.lastName}</p>}
       </div>
     </div>
   );
