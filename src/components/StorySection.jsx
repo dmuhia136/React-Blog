@@ -32,11 +32,11 @@ function StorySection() {
   return (
     <div className="grid xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-x-4 gap-y-5 pl-2 pr-10 pt-10">
       {news.map((data, index) => {
-        console.log(data,index);
+        // console.log(data,index);
         return (
           <div className="">
             <Post
-              key={data._id}
+              key={index}
               image={data.image}
               title={data.title}
               author={data.author}

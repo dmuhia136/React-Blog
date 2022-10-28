@@ -4,6 +4,7 @@ const multer = require("multer")
 const uploadMiddleware = require("../shared/fileUpload")
 exports.createPost = async (req, res) => {
     try {
+        console.log(req.file);
         var upload = uploadMiddleware.single("file");
         upload(req, res, async function (err) {
             if (err instanceof multer.MulterError) {
